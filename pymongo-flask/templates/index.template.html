@@ -32,10 +32,13 @@
             </div>
             <div class='form-group'>
                 <p>Must Have:</p>
-                <input type="checkbox" name="must-have" value="Internet"/><label>Internet</label>
-                <input type="checkbox" name="must-have" value="Washer"/><label>Washer</label>
-                <input type="checkbox" name="must-have" value="Waterfront"><label>Waterfront</label></labe>
-                <input type="checkbox" name="must-have" value="Step-free access"><label>Step-free access</label>   
+                {%for a in amentities %}
+                <input type="checkbox" name="must-have" value="{{a}}"
+                {%if a in must_have %}
+                checked
+                {%endif%}
+                /><label>{{a}}</label>
+                {%endfor%}
             </div>
             <input type="submit" class="btn btn-primary" value="Search"/>
         </form>

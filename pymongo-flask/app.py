@@ -23,7 +23,7 @@ def index():
     must_have = request.args.getlist('must-have')
     
     countries = ["Singapore", "Canada", "New Zealand", "Malaysia", "Ireland"]
-    
+    amentities = ["Internet", "Washer", "Waterfront","Step-free access"]
 
     search_criteria = {}
     print (search_criteria)
@@ -51,7 +51,8 @@ def index():
     conn = get_connection()
     cursor = conn[DATABASE_NAME]["listingsAndReviews"].find(search_criteria).limit(10)
     return render_template("index.template.html", results=cursor, 
-        search_terms=search_terms, country=country, countries=countries)
+        search_terms=search_terms, country=country, countries=countries,
+        amentities=amentities, must_have=must_have)
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
