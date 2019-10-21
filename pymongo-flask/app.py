@@ -22,8 +22,7 @@ def index():
 
     search_criteria = {}
     
-    if search_terms is not None:
-        
+    if search_terms is not None and search_terms is not "" :
         search_criteria["name"] = re.compile(r'{}'.format(search_terms), re.I)
     
     conn = get_connection()
