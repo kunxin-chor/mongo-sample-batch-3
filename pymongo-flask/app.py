@@ -22,7 +22,7 @@ def index():
     country = request.args.get('country')
     must_have = request.args.getlist('must-have')
     
-    countries = ["Singapore", "Canada", "New Zealand", "Malaysia"]
+    countries = ["Singapore", "Canada", "New Zealand", "Malaysia", "Ireland"]
     
 
     search_criteria = {}

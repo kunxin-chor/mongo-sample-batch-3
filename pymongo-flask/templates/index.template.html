@@ -20,7 +20,13 @@
                 <select name='country' class='form-control'>
                     <option>Any</option>
                       {%for c in countries %}
-                         <option>{{c}}</option>
+                         
+                         <option
+                         {%if country == c %}
+                         selected
+                         {%endif%}
+                         
+                         >{{c}}</option>
                       {%endfor%}
                 </select>
             </div>
