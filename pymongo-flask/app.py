@@ -19,7 +19,7 @@ app = Flask(__name__)
 def index():
     conn = get_connection()
     cursor = conn[DATABASE_NAME]["listingsAndReviews"].find().limit(10)
-    return render_template("index.template.html")
+    return render_template("index.template.html", results=cursor)
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
