@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
 import pymongo
+import re
 
 """
 Connect to Mongo
@@ -17,8 +18,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    search_terms = request.args.get('search-by')
+
+    search_criteria = {}
+    
+    if search_terms is not None:
+        
+        search_criteria["name"] = re.compile(r'{}'.format(search_terms), re.I)
+    
     conn = get_connection()
-    cursor = conn[DATABASE_NAME]["listingsAndReviews"].find().limit(10)
+    cursor = conn[DATABASE_NAME]["listingsAndReviews"].find(search_criteria).limit(10)
     return render_template("index.template.html", results=cursor)
 
 # "magic code" -- boilerplate
