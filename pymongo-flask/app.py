@@ -19,11 +19,15 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     search_terms = request.args.get('search-by')
+    country = request.args.get('country')
 
     search_criteria = {}
     
-    if search_terms is not None and search_terms is not "" :
+    if search_terms is not None and search_terms is not "":
         search_criteria["name"] = re.compile(r'{}'.format(search_terms), re.I)
+    
+    if country is not None and country is not "Any":
+        search_criteria['address.country'] = country 
     
     conn = get_connection()
     cursor = conn[DATABASE_NAME]["listingsAndReviews"].find(search_criteria).limit(10)
