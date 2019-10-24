@@ -55,7 +55,9 @@
             {% for each_result in results %}
             <tr>
                 <td>
+                    <a href="{{ url_for('show_details', listing_id=each_result['_id']) }}">
                     {{ each_result["name"] }}
+                    </a>
                 </td>
                 <td>
                     {{ each_result["address"]["country"] }}

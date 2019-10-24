@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import os
 import pymongo
 import re
+from bson.objectid import ObjectId
 
 """
 Connect to Mongo
@@ -39,8 +40,6 @@ def index():
         }
         
     
-        
-    print (search_criteria)
     # # for display
     # if search_terms is None:
     #     search_terms =""
@@ -53,6 +52,15 @@ def index():
     return render_template("index.template.html", results=cursor, 
         search_terms=search_terms, country=country, countries=countries,
         amentities=amentities, must_have=must_have)
+
+@app.route('/listing/<listing_id>')
+def show_details(listing_id):
+    conn = get_connection()
+    result = conn[DATABASE_NAME]["listingsAndReviews"].find_one({
+        '_id':listing_id
+    })
+    print(result)
+    return render_template("show_listing.template.html", result=result)
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
