@@ -47,8 +47,12 @@ def index():
     if search_terms is None:
         search_terms = ""
     
+    projection = {
+        '_id', 'name', 'amenities', 'address'
+    }
+    
     conn = get_connection()
-    cursor = conn[DATABASE_NAME]["listingsAndReviews"].find(search_criteria).limit(10)
+    cursor = conn[DATABASE_NAME]["listingsAndReviews"].find(search_criteria, projection).limit(10)
     return render_template("index.template.html", results=cursor, 
         search_terms=search_terms, country=country, countries=countries,
         amentities=amentities, must_have=must_have)
